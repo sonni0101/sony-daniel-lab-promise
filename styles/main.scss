@@ -1,0 +1,44 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.panel {
+    flex-grow: 1;
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    &__title {
+        padding: 1rem;
+        margin: -1rem -1rem 1rem;
+        background-color: #ddd;
+        font-size: 1rem;
+    }
+}
+
+.card-balance {
+    font-family: monospace;
+    font-size: 1.5rem;
+}
+
+.my-products {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: monospace;
+    font-size: 1.5rem;
+    line-height: 1.5;
+}
