@@ -19,14 +19,14 @@ body {
     align-items: flex-start;
 }
 
-button{
+.primary-button{
     padding: 0 1.5rem;
     height: 3rem;
     border-radius: 0.5rem;
     background: $button-primary-default;
     color: $text-dark;
     font-size: 0.625rem;
-    font-family: "Press Start 2P", system-ui;
+    @include pixel-font;
     border: none;
     box-shadow: none;
     cursor: pointer;
@@ -37,6 +37,23 @@ button{
 
     &:active{
         background: $button-primary-active;
+    }
+}
+
+.secondary-button{
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    background: none;
+    cursor: pointer;
+
+    &:hover{
+        opacity: 80%;
+    }
+
+    &:active{
+        opacity: 60%;
     }
 }
 
@@ -117,7 +134,7 @@ button{
         }
 
         &--amount{
-            font-family: "Source Code Pro", monospace;
+            @include default-font;
         }
     }
 
@@ -146,6 +163,13 @@ button{
         gap: 2rem;
     }
 
+    &__heading-wrapper{
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
     &__product-group{
         display: flex;
         flex-direction: column;
@@ -172,7 +196,12 @@ button{
         }
 
         &--amount{
-            font-family: "Source Code Pro", monospace;
+            @include default-font;
+            font-size: 1.125rem;
+        }
+
+        &--price{
+            @include default-font;
             font-size: 1.125rem;
         }
     }

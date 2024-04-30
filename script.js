@@ -6,7 +6,6 @@
 /* Your credit card */
 const creditCard = { balance: 0, limit: 2000 };
 const balanceEl = document.querySelector(".balance-amount");
-
 /* Products you can buy */
 const products = [
     { image: "./asset/t-shirt.svg", name: "T-shirt", price: 20, numberPurchased: 0 },
@@ -46,7 +45,7 @@ function displayBalances() {
 
         const price = document.createElement("span");
         price.textContent = products[i].price;
-        price.classList.add("transaction-panel__product-price--amount");
+        price.classList.add("transaction-panel__product-price--price");
         productPriceElm.append(price);
 
         const symbol = document.createElement("span");
@@ -55,11 +54,9 @@ function displayBalances() {
         productPriceElm.append(symbol);
 
         const productAmount = document.createElement("span");
-        productAmount.textContent = products[i].numberPurchased;
         productAmount.classList.add("transaction-panel__product-price--amount");
         productPriceElm.append(productAmount);
-
-
+    
         productGroup.append(productElm);
         productElm.append(productPriceElm);
     }
@@ -72,7 +69,7 @@ function displayBalances() {
 function buyProduct(product) {
     return new Promise((resolve, reject) => {
         // Wait a second or two to simulate credit card processing delay
-        const randomTime = Math.random() * 2000;
+        const randomTime = Math.random() * 3000;
         setTimeout(processPayment, randomTime);
 
         function processPayment() {
@@ -83,10 +80,7 @@ function buyProduct(product) {
                 creditCard.balance += product.price;
                 product.numberPurchased++;
 
-                // show the balance
-                balanceEl.innerText = "$ " + product.price;
-
-                // post status
+                // show status
                 const status = `🤑 Purchased ${product.name} for $${product.price}`;
                 purchaseStatus.innerHTML = status;
                 
@@ -95,7 +89,6 @@ function buyProduct(product) {
                     timestamp: Date.now(),
                 });
             } else {
-
                 const error = `⛔️ Declined purchase of ${product.name} for $${product.price}`;
                 purchaseStatus.innerHTML = error;
 
@@ -115,19 +108,40 @@ function buyProduct(product) {
 /*    Start writing code below!      */
 /*************************************/
 
+
+function displayNewBalances() {
+    // Display the credit card balance
+    balanceEl.innerText = "$ " + creditCard.balance;
+
+    const amountElm = document.querySelectorAll(".transaction-panel__product-price--amount");
+    
+    products.forEach((product, i) => {
+        if (amountElm[i]){ // check is the item exists 
+            amountElm[i].innerText = product.numberPurchased;    
+        }
+
+    });
+}
+
 displayBalances(); // You can call this pre-written function to update the DOM later
+displayNewBalances(); // display new balance
 
 const processAll = document.getElementById("process-all");
 const processInSequal = document.getElementById("process-sequal");
 const purchaseStatus = document.getElementById("status");
 
-// purchase in sequal
+// promise -> purchase in sequal
 const goShopping = async () => {
 
     try{
         const tShirtResult = await buyProduct(products[0]);
+        displayNewBalances();
+
         const handBageResult = await buyProduct(products[1]);
+        displayNewBalances();
+
         const computerResult = await buyProduct(products[2]);
+        displayNewBalances();
 
     } catch (error){
         console.log(error);
@@ -135,3 +149,5 @@ const goShopping = async () => {
 };
 
 processInSequal.addEventListener("click", goShopping);
+
+// promise all 

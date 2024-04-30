@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <script src="script.js" defer></script>
+    <script src="./page_refresh.js"></script>
     <title>Lab: Promises</title>
 </head>
 
@@ -35,7 +36,7 @@
                 </div>
 
                 <div class="transaction-panel__section">
-                    <h2 class="transaction-panel__heading">Transaction fail?</h2>
+                    <h2 class="transaction-panel__heading">Transaction failed?</h2>
                     <p>
                         If your transaction fails, it may be due to issues with our payment system, a balance exceeding your limit, or your card being locked. Please contact us immediately for assistance.
                     </p>
@@ -46,12 +47,17 @@
                 <h1 class="transaction-panel__title">Products info</h1>
 
                 <div class="transaction-panel__section transaction-panel__section--space-between">
-                    <div class="transaction-panel__product-group"><h2 class="transaction-panel__heading">Your cart</h2></div>
+                    <div class="transaction-panel__product-group">
+                        <div class="transaction-panel__heading-wrapper">
+                            <h2 class="transaction-panel__heading">Your cart</h2>
+                            <button class="transaction-panel__button secondary-button" onclick="refreshPage()"><img src="./asset/refresh.svg" alt="refresh icon"/></button>
+                        </div>
+                    </div>
 
                     <div class="transaction-panel__button-section-wrapper">
                         <div class="transaction-panel__button-group">
-                            <button class="transaction-panel__button" id = "process-all">Process all</button>
-                            <button class="transaction-panel__button" id = "process-sequal">Process in sequal</button>
+                            <button class="transaction-panel__button primary-button" id = "process-all">Process all</button>
+                            <button class="transaction-panel__button primary-button" id = "process-sequal">Process in sequal</button>
                         </div>
                         <span class="transaction-panel__status" id="status"></span>
                     </div>

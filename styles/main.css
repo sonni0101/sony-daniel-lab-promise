@@ -50,7 +50,7 @@ body {
   align-items: flex-start;
 }
 
-button {
+.primary-button {
   padding: 0 1.5rem;
   height: 3rem;
   border-radius: 0.5rem;
@@ -62,11 +62,26 @@ button {
   box-shadow: none;
   cursor: pointer;
 }
-button:hover {
+.primary-button:hover {
   background: #99C93F;
 }
-button:active {
+.primary-button:active {
   background: #73972F;
+}
+
+.secondary-button {
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  background: none;
+  cursor: pointer;
+}
+.secondary-button:hover {
+  opacity: 80%;
+}
+.secondary-button:active {
+  opacity: 60%;
 }
 
 .transaction-panel {
@@ -178,6 +193,12 @@ button:active {
   justify-content: space-between;
   gap: 2rem;
 }
+.transaction-panel__heading-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
 .transaction-panel__product-group {
   display: flex;
   flex-direction: column;
@@ -204,6 +225,10 @@ button:active {
   font-size: 1.125rem;
 }
 .transaction-panel__product-price--amount {
+  font-family: "Source Code Pro", monospace;
+  font-size: 1.125rem;
+}
+.transaction-panel__product-price--price {
   font-family: "Source Code Pro", monospace;
   font-size: 1.125rem;
 }
