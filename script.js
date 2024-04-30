@@ -10,7 +10,7 @@ const creditCard = { balance: 0, limit: 2000 };
 const products = [
     { name: "T-shirt", price: 20, numberPurchased: 0 },
     { name: "Handbag", price: 200, numberPurchased: 0 },
-    { name: "Computer", price: 2000, numberPurchased: 0 }
+    { name: "Computer", price: 1595, numberPurchased: 0 }
 ];
 
 /* Function to display the current amounts of everything in the DOM */
@@ -97,9 +97,69 @@ async function buyAllProducts() {
     }
 }
 
+/** Function to return a product
+ * Takes a single product object as a parameter
+ * Returns a promise
+ */
+function returnProduct(product) {
+    return new Promise((resolve, reject) => {
+        // Wait a simulated random time, 1 or 2 seconds, to simulate
+        // credit card processing time delay
+        const randomTime = Math.random() * 2000;
+        setTimeout(processRefund, randomTime);
+
+        function processRefund() {
+            if(product.numberPurchased != 0) {
+                creditCard.balance -= product.price;
+                product.numberPurchased--;
+                console.log(`Refunded ${product.name} for $${product.price}`);
+                return resolve({
+                    status: `Refunded ${product.name} for $${product.price}`,
+                    timestamp: Date.now()
+                });
+            }
+            
+            // reject the promise if we don't own the item
+            reject({
+                status: `You do not own ${product.name}. Refund declined`,
+                timestamp: Date.now()
+            }); 
+        }
+    });
+}
+
+async function returnOneProduct(product) {
+    try {
+        (product.numberPurchased != 0) ? 
+        await returnProduct(product) : false;
+        displayBalances();
+    } catch (error) {
+        console.log(error);
+    } 
+
+}
+
 // goShopping();
-buyAllProducts();
+buyAllProducts()
+.then(resolve => returnOneProduct(products[0]));
 
 
+
+/* .then((resolve) => {
+    try {
+        returnProduct(products[0])
+    } catch (error) {
+        console.log(error)
+    }
+})
+.then((resolve) => displayBalances())
+.then((resolve) => {
+    try {
+        returnProduct(products[0])
+    } catch (error) {
+        console.log(error)
+    }
+}); */
+    
 
 
