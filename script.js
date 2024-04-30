@@ -130,8 +130,7 @@ function returnProduct(product) {
 
 async function returnOneProduct(product) {
     try {
-        (product.numberPurchased != 0) ? 
-        await returnProduct(product) : false;
+        (product.numberPurchased != 0) ? await returnProduct(product) : false;
         displayBalances();
     } catch (error) {
         console.log(error);
@@ -143,23 +142,6 @@ async function returnOneProduct(product) {
 buyAllProducts()
 .then(resolve => returnOneProduct(products[0]));
 
-
-
-/* .then((resolve) => {
-    try {
-        returnProduct(products[0])
-    } catch (error) {
-        console.log(error)
-    }
-})
-.then((resolve) => displayBalances())
-.then((resolve) => {
-    try {
-        returnProduct(products[0])
-    } catch (error) {
-        console.log(error)
-    }
-}); */
     
 
 
