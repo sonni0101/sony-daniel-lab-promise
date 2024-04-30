@@ -67,7 +67,38 @@ function buyProduct(product) {
 
 displayBalances(); // You can call this pre-written function to update the DOM later
 
+/* async function goShopping() {
+    try {
+        let tShirtResult = await buyProduct(products[0]);
+        console.log(tShirtResult);
+        let handbagResult = await buyProduct(products[1]);
+        console.log(handbagResult);
+        let computerResult = await buyProduct(products[2]);
+        console.log(computerResult);
+        displayBalances();
+    
+    } catch (error) {
+        console.log(error);
+    }
+} */
 
+async function buyAllProducts() {
+    try {
+        let promiseAllResult = await Promise.all([
+            await buyProduct(products[0]),
+            await buyProduct(products[1]),
+            await buyProduct(products[2])
+        ]);
+        displayBalances();
+        console.log("Purchased 3 products");
+    } catch (error) {
+        displayBalances();
+        console.log("Failed to purchase all 3 products");
+    }
+}
+
+// goShopping();
+buyAllProducts();
 
 
 
