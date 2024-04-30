@@ -119,7 +119,6 @@ function displayNewBalances() {
         if (amountElm[i]){ // check is the item exists 
             amountElm[i].innerText = product.numberPurchased;    
         }
-
     });
 }
 
@@ -144,10 +143,94 @@ const goShopping = async () => {
         displayNewBalances();
 
     } catch (error){
-        console.log(error);
+        console.log("Not enough funds");
     }
 };
 
 processInSequal.addEventListener("click", goShopping);
 
 // promise all 
+
+const goShoppingAll = async () => {
+    try {
+        
+        // it's randomized 
+        const buyAll = await Promise.all([
+            buyProduct(products[0]),
+            buyProduct(products[1]),
+            buyProduct(products[2]),
+        ]);
+
+        //// idk why this works better than prmoise all
+        // for (const product of products) {
+        //     await buyProduct(product);
+        // };
+        
+        console.log("Purchased all the products");
+
+    } catch (error) {
+        console.log("Error caught in goShoppingAll:", error); // More detailed error logging
+        displayNewBalances(); // If I don't have this here, then it won't invoke and display the result
+    }
+};
+
+processAll.addEventListener("click", goShoppingAll);
+
+
+// refund
+const refund = document.getElementById("refund");
+
+function refundProduct(product) {
+    return new Promise((resolve, reject) => {
+        // Wait a second or two to simulate credit card processing delay
+        const randomTime = Math.random() * 3000;
+        setTimeout(processPayment, randomTime);
+
+        function processPayment() {
+            const purchaseStatus = document.getElementById("status");
+            // Check if there are any items purchased and if the credit card limit allows a refund
+            if (product.numberPurchased > 0 && creditCard.balance >= product.price) {
+                creditCard.balance -= product.price; // Increase the balance back as it's a refund
+                product.numberPurchased--;
+
+                // show status
+                const status = `💰 ${product.name} is refunded`;
+                purchaseStatus.innerHTML = status;
+                
+                return resolve({
+                    status,
+                    timestamp: Date.now(),
+                });
+            } else {
+                const error = `⛔️ Declined to refund ${product.name}`;
+                purchaseStatus.innerHTML = error;
+
+                // If the conditions are not met, reject the promise
+                reject({
+                    error,
+                    timestamp: Date.now()
+                }); 
+            }
+        }
+    });
+}
+
+const refundItems = async () => {
+
+    try{
+        const tShirtResult = await refundProduct(products[0]);
+        displayNewBalances();
+
+        const handBageResult = await refundProduct(products[1]);
+        displayNewBalances();
+
+        const computerResult = await refundProduct(products[2]);
+        displayNewBalances();
+
+    } catch (error){
+        console.log("Not purchased");
+    }
+};
+
+refund.addEventListener("click", refundItems);
+

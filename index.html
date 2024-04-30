@@ -24,7 +24,7 @@
                     <div class="transaction-panel__container">
                         <div class="transaction-panel__wrapper">
                             <img src="./asset/card.svg" alt ="credit card image" />
-                            <div class = "transaction-panel__badge"><h3>Card limit $,2000</h3></div>
+                            <div class = "transaction-panel__badge"><h3>Card limit $2,000</h3></div>
                         </div>
                         
                         <div class="transaction-panel__balance card-balance">
@@ -49,15 +49,18 @@
                 <div class="transaction-panel__section transaction-panel__section--space-between">
                     <div class="transaction-panel__product-group">
                         <div class="transaction-panel__heading-wrapper">
-                            <h2 class="transaction-panel__heading">Your cart</h2>
-                            <button class="transaction-panel__button secondary-button" onclick="refreshPage()"><img src="./asset/refresh.svg" alt="refresh icon"/></button>
+                            <div class="transaction-panel__heading-wrapper--left">
+                                <h2 class="transaction-panel__heading">Your cart</h2>
+                                <button class="transaction-panel__button secondary-button" onclick="refreshPage()"><img src="./asset/refresh.svg" alt="refresh icon"/></button>
+                            </div>
+                            <button class="transaction-panel__button secondary-button" id="refund">Refund</button>
                         </div>
                     </div>
 
                     <div class="transaction-panel__button-section-wrapper">
                         <div class="transaction-panel__button-group">
-                            <button class="transaction-panel__button primary-button" id = "process-all">Process all</button>
-                            <button class="transaction-panel__button primary-button" id = "process-sequal">Process in sequal</button>
+                            <button class="transaction-panel__button primary-button" id = "process-all">Buy all</button>
+                            <button class="transaction-panel__button primary-button" id = "process-sequal">Buy in sequel</button>
                         </div>
                         <span class="transaction-panel__status" id="status"></span>
                     </div>

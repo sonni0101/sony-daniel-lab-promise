@@ -73,12 +73,15 @@ body {
   padding: 0;
   margin: 0;
   border: none;
+  color: white;
+  font-family: "Press Start 2P", system-ui;
   box-shadow: none;
   background: none;
   cursor: pointer;
+  opacity: 80%;
 }
 .secondary-button:hover {
-  opacity: 80%;
+  opacity: 100%;
 }
 .secondary-button:active {
   opacity: 60%;
@@ -194,6 +197,12 @@ body {
   gap: 2rem;
 }
 .transaction-panel__heading-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.transaction-panel__heading-wrapper--left {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
