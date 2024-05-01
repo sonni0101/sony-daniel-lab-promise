@@ -150,22 +150,16 @@ const goShopping = async () => {
 processInSequal.addEventListener("click", goShopping);
 
 // promise all 
-
 const goShoppingAll = async () => {
     try {
         
-        // it's randomized 
-        const buyAll = await Promise.all([
-            buyProduct(products[0]),
-            buyProduct(products[1]),
-            buyProduct(products[2]),
+        const buyAll = Promise.all([
+           await buyProduct(products[0]),
+           await buyProduct(products[1]),
+           await buyProduct(products[2]),
         ]);
 
-        //// idk why this works better than prmoise all
-        // for (const product of products) {
-        //     await buyProduct(product);
-        // };
-        
+        displayNewBalances();
         console.log("Purchased all the products");
 
     } catch (error) {
@@ -188,6 +182,7 @@ function refundProduct(product) {
 
         function processPayment() {
             const purchaseStatus = document.getElementById("status");
+            
             // Check if there are any items purchased and if the credit card limit allows a refund
             if (product.numberPurchased > 0 && creditCard.balance >= product.price) {
                 creditCard.balance -= product.price; // Increase the balance back as it's a refund
