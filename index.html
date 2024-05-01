@@ -5,17 +5,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <script src="script.js" defer></script>
+    <script src="./page_refresh.js"></script>
     <title>Lab: Promises</title>
 </head>
+
 <body>
-    <section class="panel">
-        <h1 class="panel__title">Credit Card Statement <small>(Limit: $2,000)</small></h1>
-        <span class="card-balance"></span>
-    </section>
-    <section class="panel">
-        <h1 class="panel__title">Products You Own</h1>
-        <ul class="my-products"></ul>
-    </section>
+
+    <div class="transaction-panel">
+        <div class="transaction-panel__group">
+            <section class="transaction-panel__panel-left">
+                <h1 class="transaction-panel__title">Card info</h1>
+                <div class="transaction-panel__section">
+                    <h2 class="transaction-panel__heading">Credit Card Statement</h2>
+                    <div class="transaction-panel__container">
+                        <div class="transaction-panel__wrapper">
+                            <img src="./asset/card.svg" alt ="credit card image" />
+                            <div class = "transaction-panel__badge"><h3>Card limit $2,000</h3></div>
+                        </div>
+                        
+                        <div class="transaction-panel__balance card-balance">
+                            <span class="transaction-panel__balance--label">Balance</span>
+                            <span class="transaction-panel__balance--divider">|</span>
+                            <span class="transaction-panel__balance--amount balance-amount"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transaction-panel__section">
+                    <h2 class="transaction-panel__heading">Transaction failed?</h2>
+                    <p>
+                        If your transaction fails, it may be due to issues with our payment system, a balance exceeding your limit, or your card being locked. Please contact us immediately for assistance.
+                    </p>
+                </div>
+            </section>
+
+            <section class="transaction-panel__panel-right">
+                <h1 class="transaction-panel__title">Products info</h1>
+
+                <div class="transaction-panel__section transaction-panel__section--space-between">
+                    <div class="transaction-panel__product-group">
+                        <div class="transaction-panel__heading-wrapper">
+                            <div class="transaction-panel__heading-wrapper--left">
+                                <h2 class="transaction-panel__heading">Your cart</h2>
+                                <button class="transaction-panel__button secondary-button" onclick="refreshPage()"><img src="./asset/refresh.svg" alt="refresh icon"/></button>
+                            </div>
+                            <button class="transaction-panel__button secondary-button" id="refund">Refund</button>
+                        </div>
+                    </div>
+
+                    <div class="transaction-panel__button-section-wrapper">
+                        <div class="transaction-panel__button-group">
+                            <button class="transaction-panel__button primary-button" id = "process-all">Buy all</button>
+                            <button class="transaction-panel__button primary-button" id = "process-sequal">Buy in sequel</button>
+                        </div>
+                        <span class="transaction-panel__status" id="status"></span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="transaction-panel__logo"><span class="transaction-panel__logo--title">Powered by </span><span class="transaction-panel__logo--label">Sony & Daniel</span></section>
+    </div>
+
 </body>
 </html>
